@@ -41,7 +41,7 @@ export default function Join() {
           />
         </div>
         <Link
-          to={`/chat?username=${username}&topic=${topic}`}
+          to={`/chat?name=${username}&topic=${topic}`}
           onClick={(event) =>
             !username || !topic ? event.preventDefault() : null
           }

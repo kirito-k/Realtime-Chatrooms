@@ -6,11 +6,15 @@ const router = require("./router");
 app.use(router);
 
 io.on("connection", (socket) => {
-    console.log(`socket: ${socket}`);
-    console.log("Someone acutally connected");
+    console.log("A new user connected");
+
+    socket.on("join", (data, callback) => {
+        console.log(`${data.name} ${data.topic}`);
+        callback("User data received by server")
+    })
 
     socket.on("disconnect", () => {
-        console.log("Someone disconnected :(");
+        console.log("User disconnected :(");
     })
 })
 
