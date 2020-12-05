@@ -3,14 +3,14 @@ import { Link } from "react-router-dom";
 import "./Join.css";
 
 export default function Join() {
-  let [username, setUserName] = useState("");
+  let [name, setname] = useState("");
   let [topic, setTopic] = useState("");
 
   function handleChange(event) {
     let { name, value } = event.target;
 
-    if (name === "username") {
-      setUserName(value);
+    if (name === "name") {
+      setname(value);
     } else if (name === "topic") {
       setTopic(value);
     }
@@ -23,10 +23,10 @@ export default function Join() {
         <div>
           <input
             type="text"
-            name="username"
+            name="name"
             className="joinInput"
             placeholder="Please enter your name"
-            value={username}
+            value={name}
             onChange={handleChange}
           />
         </div>
@@ -41,9 +41,9 @@ export default function Join() {
           />
         </div>
         <Link
-          to={`/chat?name=${username}&topic=${topic}`}
+          to={`/chat?name=${name}&topic=${topic}`}
           onClick={(event) =>
-            !username || !topic ? event.preventDefault() : null
+            !name || !topic ? event.preventDefault() : null
           }
         >
           <button className="button mt-20">Enter</button>

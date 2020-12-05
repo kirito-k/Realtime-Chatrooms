@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
-import "./Chat.css";
 import queryString from "query-string";
 import io from "socket.io-client";
+import "./Chat.css";
 
 let socket;
 
@@ -12,7 +12,13 @@ export default function Chat(props) {
   useEffect(() => {
     socket = io(ENDPOINT);
 
-    socket.emit("join", { name, topic }, (msg) => console.log(msg));
+    socket.emit("join", { name, topic }, () => {});
+
+    return () => {
+      socket.emit("disconnect");
+
+      socket.off();
+    }
   }, [ENDPOINT, name, topic]);
 
   return <h1>This is Chat route</h1>;
