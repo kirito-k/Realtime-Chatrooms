@@ -17,7 +17,7 @@ Live version of app: https://chat-with-kiritok.netlify.app/
 
 ## Implementation
 - Clone the repository
-- Go inside individual "client" and "server" folders and install their dependencies separately. Perform the following commands from starting from root directory.
+- Go inside individual "client" and "server" folders and install their dependencies separately. Perform the following commands from the root directory.
 ```Client folder
 cd client
 npm install
