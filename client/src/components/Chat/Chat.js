@@ -12,7 +12,7 @@ let socket;
 
 export default function Chat(props) {
   const { name, room } = queryString.parse(props.location.search);
-  const ENDPOINT = "localhost:4000";
+  const ENDPOINT = "https://real-time-chat-dk.herokuapp.com/";
   const [messages, setMessages] = useState([]);
   const [users, setUsers] = useState([]);
 
