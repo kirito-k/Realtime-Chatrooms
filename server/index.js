@@ -2,6 +2,7 @@ const app = require("express")();
 const server = require("http").createServer(app);
 const io = require("socket.io")(server);
 const router = require("./router");
+const cors = require("cors");
 const {
   addUser,
   removeUser,
@@ -10,6 +11,7 @@ const {
 } = require("./appMethods");
 
 app.use(router);
+app.use(cors);
 
 io.on("connection", (socket) => {
   //   New user joined
