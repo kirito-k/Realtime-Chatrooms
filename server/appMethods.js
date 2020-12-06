@@ -1,8 +1,8 @@
 const users = [];
 
 function addUser({ id, name, topic }) {
-  name = name.trim().toLowerCase();
-  topic = topic.trim().toLowerCase();
+  name = name.trim();
+  topic = topic.trim();
 
   let found = users.find((user) => {
     user.name === name && user.topic === topic;
