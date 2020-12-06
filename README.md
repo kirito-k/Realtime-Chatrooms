@@ -1,4 +1,4 @@
-# Real-Time Chat Application
+# Real-Time Chatrooms
 Created a real-time chat application where people can collaborate and communicate with one another.
 User has to enter his/her name and a room name where you would like to join.
 
