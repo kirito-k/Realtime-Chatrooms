@@ -5,12 +5,12 @@ User has to enter his/her name and a room name where you would like to join.
 Live version of app: https://chat-with-kiritok.netlify.app/
 
 ## Table of Contents
-1. [Pre-requisite](#pre-requisite)
+1. [Pre-requisite Tools](#pre-requisite-tools)
 1. [Implementation](#implementation)
 1. [Demo](#demo)
 1. [Technologies Used](#technologies-used)
 
-## Pre-requisite tools
+## Pre-requisite Tools
 - Node.js
 - npm
 - React
