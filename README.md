@@ -43,7 +43,8 @@ npm start
 - Enjoy the live chatapp.
 
 ## Demo
-![](./demo/real-time-chat-app-demo.mp4)
+<img src="https://raw.githubusercontent.com/kirito-k/realtime-chat-app/main/demo/1.gif" title="Short Demo gif" />
+
 
 ## Technologies Used
 ### Client side:
