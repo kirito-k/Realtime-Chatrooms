@@ -42,9 +42,7 @@ export default function Join() {
         </div>
         <Link
           to={`/chat?name=${name}&room=${room}`}
-          onClick={(event) =>
-            !name || !room ? event.preventDefault() : null
-          }
+          onClick={(event) => (!name || !room ? event.preventDefault() : null)}
         >
           <button className="button mt-20">Enter</button>
         </Link>

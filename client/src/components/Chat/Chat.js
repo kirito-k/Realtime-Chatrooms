@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import queryString from "query-string";
 import io from "socket.io-client";
+
 import InfoBar from "../InfoBar/InfoBar";
 import Messages from "../Messages/Messages";
 import Input from "../Input/Input";
@@ -17,34 +18,28 @@ export default function Chat(props) {
 
   useEffect(() => {
     socket = io(ENDPOINT);
-    socket.emit("join", { name, room }, () => {});
+    socket.emit("join", { name, room }, (error) => {
+      if(error) {
+        alert(error);
+      }
+    });
 
     return () => {
-      console.log("Logging off");
       socket.emit("disconnect");
-
       socket.off();
     };
   }, [ENDPOINT, name, room]);
 
   useEffect(() => {
-    console.log("inside effect");
 
     socket.on("message", (message) => {
-      console.log("Got a message");
       setMessages((messages) => [...messages, message]);
     });
 
     socket.on("currentUsers", ({ users }) => {
       setUsers(users);
-      console.log(`users After: ${users}`);
     });
   }, []);
-
-  // useEffect(() => {
-  //   console.log(`users Before: ${users}`);
-
-  // }, [users]);
 
   function sendMessage(message) {
     socket.emit("sendMessage", message, () => {});
@@ -54,6 +49,7 @@ export default function Chat(props) {
     <div className="outerContainer">
       <div className="container">
         <InfoBar room={room} />
+
         <Messages messages={messages} name={name} />
 
         <Input sendMessage={sendMessage} />

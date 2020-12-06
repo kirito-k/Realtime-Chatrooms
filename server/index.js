@@ -16,30 +16,34 @@ io.on("connection", (socket) => {
   socket.on("join", (data, callback) => {
     let { name, room } = data;
     let { user, error } = addUser({ id: socket.id, name, room });
-    if (error) return callback({ error });
 
+    if (error) return callback(error);
+
+    // Welcome message
     socket.emit("message", {
       user: "admin",
       msg: `Welcome to ${user.room} community ${user.name}`,
     });
 
+    socket.join(user.room);
+
+    // Notify other participants of new user
     socket.broadcast.to(user.room).emit("message", {
       user: "admin",
       msg: `${user.name} has joined the chat`,
     });
 
-    socket.join(user.room);
-
+    // Info of all users present in the room
     io.to(user.room).emit("currentUsers", {
       users: getUsersInRoom(user.room),
     });
+
+    callback();
   });
 
+  // User sent message
   socket.on("sendMessage", (message, callback) => {
     let user = getUser(socket.id);
-
-    console.log(`Message received (${user.name}): ${message}`);
-    console.log(user);
 
     io.to(user.room).emit("message", {
       user: user.name,
@@ -51,13 +55,17 @@ io.on("connection", (socket) => {
 
   //   User disconnected
   socket.on("disconnect", () => {
+    // Remove user from datalog
     let user = removeUser(socket.id);
+
     if (user) {
+      // Notify user leaving the room
       io.to(user.room).emit("message", {
         user: "admin",
         msg: `${user.name} has left the chatroom.`,
       });
 
+      // Notify remaining users in the room
       io.to(user.room).emit("currentUsers", {
         users: getUsersInRoom(user.room),
       });

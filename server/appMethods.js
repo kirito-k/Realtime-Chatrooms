@@ -4,17 +4,16 @@ function addUser({ id, name, room }) {
   name = name.trim();
   room = room.trim();
 
-  let found = users.find((user) => {
+  let userAlreadyExist = users.find((user) => {
     user.name === name && user.room === room;
   });
 
-  if (found) {
-    return { error: "User name already taken" };
-  } else {
-    let user = { id, name, room };
-    users.push(user);
-    return { user };
-  }
+  if (!name || !room) return { error: "Username and room are required" };
+  if (userAlreadyExist) return { error: "User name already taken" };
+
+  let user = { id, name, room };
+  users.push(user);
+  return { user };
 }
 
 function removeUser(id) {
