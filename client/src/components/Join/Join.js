@@ -4,15 +4,15 @@ import "./Join.css";
 
 export default function Join() {
   let [name, setname] = useState("");
-  let [topic, setTopic] = useState("");
+  let [room, setRoom] = useState("");
 
   function handleChange(event) {
     let { name, value } = event.target;
 
     if (name === "name") {
       setname(value);
-    } else if (name === "topic") {
-      setTopic(value);
+    } else if (name === "room") {
+      setRoom(value);
     }
   }
 
@@ -33,17 +33,17 @@ export default function Join() {
         <div>
           <input
             type="text"
-            name="topic"
+            name="room"
             className="joinInput mt-20"
-            placeholder="Please enter a topic name"
-            value={topic}
+            placeholder="Please enter a room name"
+            value={room}
             onChange={handleChange}
           />
         </div>
         <Link
-          to={`/chat?name=${name}&topic=${topic}`}
+          to={`/chat?name=${name}&room=${room}`}
           onClick={(event) =>
-            !name || !topic ? event.preventDefault() : null
+            !name || !room ? event.preventDefault() : null
           }
         >
           <button className="button mt-20">Enter</button>

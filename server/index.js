@@ -14,23 +14,25 @@ app.use(router);
 io.on("connection", (socket) => {
   //   New user joined
   socket.on("join", (data, callback) => {
-    let { name, topic } = data;
-    let { user, error } = addUser({ id: socket.id, name, topic });
-    console.log(`${user.name} connected to topic ${user.topic}`);
-
+    let { name, room } = data;
+    let { user, error } = addUser({ id: socket.id, name, room });
     if (error) return callback({ error });
 
     socket.emit("message", {
       user: "admin",
-      msg: `Welcome to ${user.topic} community ${user.name}`,
+      msg: `Welcome to ${user.room} community ${user.name}`,
     });
 
-    socket.broadcast.to(user.topic).emit("message", {
+    socket.broadcast.to(user.room).emit("message", {
       user: "admin",
       msg: `${user.name} has joined the chat`,
     });
 
-    socket.join(user.topic);
+    socket.join(user.room);
+
+    io.to(user.room).emit("currentUsers", {
+      users: getUsersInRoom(user.room),
+    });
   });
 
   socket.on("sendMessage", (message, callback) => {
@@ -39,7 +41,7 @@ io.on("connection", (socket) => {
     console.log(`Message received (${user.name}): ${message}`);
     console.log(user);
 
-    io.to(user.topic).emit("message", {
+    io.to(user.room).emit("message", {
       user: user.name,
       msg: message,
     });
@@ -49,7 +51,17 @@ io.on("connection", (socket) => {
 
   //   User disconnected
   socket.on("disconnect", () => {
-    console.log("User disconnected :(");
+    let user = removeUser(socket.id);
+    if (user) {
+      io.to(user.room).emit("message", {
+        user: "admin",
+        msg: `${user.name} has left the chatroom.`,
+      });
+
+      io.to(user.room).emit("currentUsers", {
+        users: getUsersInRoom(user.room),
+      });
+    }
   });
 });
 

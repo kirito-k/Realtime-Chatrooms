@@ -1,19 +1,19 @@
 const users = [];
 
-function addUser({ id, name, topic }) {
+function addUser({ id, name, room }) {
   name = name.trim();
-  topic = topic.trim();
+  room = room.trim();
 
   let found = users.find((user) => {
-    user.name === name && user.topic === topic;
+    user.name === name && user.room === room;
   });
 
   if (found) {
     return { error: "User name already taken" };
   } else {
-    let user = { id, name, topic };
+    let user = { id, name, room };
     users.push(user);
-    return {user};
+    return { user };
   }
 }
 
