@@ -40,7 +40,7 @@ npm start
 ```
 - A browser will automatically open at 'localhost:3000' or open it using the URL.
 - Open multiple tabs and enter the same chatrooms.
-- Enjoy the live chatapp.
+- Enjoy the live chat app.
 
 ## Demo
 <img src="https://raw.githubusercontent.com/kirito-k/realtime-chat-app/main/demo/1.gif" title="Short Demo gif" />
