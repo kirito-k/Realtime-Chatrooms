@@ -49,6 +49,7 @@ npm start
 ## Technologies Used
 ### Client side:
 - React
+- Axios
 - React Hooks
 - Socket.io-client
 
