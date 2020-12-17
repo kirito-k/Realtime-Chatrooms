@@ -54,6 +54,7 @@ npm start
 
 ### Server side:
 - Node.js
+- Axios
 - Express.js
 - Express Router
 - Socket.io
