@@ -1,5 +1,5 @@
 # Real-Time Chatrooms
-Created a real-time chat application where people can collaborate and communicate with one another
+Created a real-time chatroom application where users can talk to eachother in a chatroom.
 User has to enter his/her name and a room name where you would like to join
 
 Live version of app: https://chat-with-kiritok.netlify.app/
